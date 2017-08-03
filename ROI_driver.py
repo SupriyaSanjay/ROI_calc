@@ -1,4 +1,7 @@
-num_fields = 5
+""" Const for number of fields to enter """
+NUM_FIELDS = 5
+
+""" Get data: prompts users for data and saves results in array of integers """ 
 def get_data(): 
 
 	""" Statements to be Printed """ 
@@ -27,13 +30,14 @@ def get_data():
 	""" [Type, orig_ROI, TPY, TPrice, Employee_wage] """
 	Results = []
 
-	for i in range(num_fields):
+	for i in range(NUM_FIELDS):
 
 		print(Print_statements[i])
 		Results.append(float(raw_input()))
 	
 	return Results
 
+""" Parse types: parses types of an entry and calls the corresponding fxn """
 def parse_types(Results):
 
 	if Results["Type"] < 9: 
@@ -96,7 +100,7 @@ def print_ROI(ROI_breakdown):
 	print("Save " + str(ROI_breakdown["Automation"]) + " with Box Office Automation.")
 	print("Increase revenue by " + str(ROI_breakdown["Social Media"]) + " and publicize your events with Social Media.")
 
-
+""" General: takes input of General venue info, calculates and saves relevant revenue numbers """
 def General(input):
 
 	ROI_breakdown = {}
@@ -106,6 +110,7 @@ def General(input):
 	ROI_breakdown["Total"] = sum(ROI_breakdown.values())
 	print_ROI(ROI_breakdown)
 
+""" Performing Arts: takes input of PA venue info, calculates and saves relevant revenue numbers """
 def Performing_arts(input):
 
 	ROI_breakdown = {}
@@ -113,9 +118,9 @@ def Performing_arts(input):
 	ROI_breakdown["Social Media"] = social_media(input["TPY"], input["Type"])
 	ROI_breakdown["Online Sales"] = online_sales(input["TPY"], input["TPrice"], .17)
 	ROI_breakdown["Total"] = sum(ROI_breakdown.values())
-	print(ROI_breakdown["Total"])
 	print_ROI(ROI_breakdown)
 
+""" University: takes input of University venue info, calculates and saves relevant revenue numbers """
 def University(input):
 
 	ROI_breakdown = {}
@@ -124,6 +129,7 @@ def University(input):
 	ROI_breakdown["Total"] = sum(ROI_breakdown.values())
 	print_ROI(ROI_breakdown)
 
+""" Festival: takes input of Festival info, calculates and saves relevant revenue numbers """
 def Festival(input):
 
 	ROI_breakdown = {}
@@ -132,6 +138,7 @@ def Festival(input):
 	ROI_breakdown["Total"] = sum(ROI_breakdown.values())
 	print_ROI(ROI_breakdown)
 
+""" Live Music: takes input of Live Music info, calculates and saves relevant revenue numbers """
 def Live_Music(input):
 
 	ROI_breakdown = []
@@ -146,10 +153,12 @@ if __name__ == '__main__':
 	Results_dict = {}
 	Results_fields = ["Type", "orig_ROI", "TPY", "TPrice", "Employee_wage"]
 
-	for i in range(num_fields): 
+	for i in range(NUM_FIELDS): 
 
+		""" Fill in results dictionary with fields entered """ 
 		Results_dict[Results_fields[i]] = Results[i]
 
+	""" Parse type of venue and call corresponding function to calculate ROI""" 
 	parse_types(Results_dict)
 
 
