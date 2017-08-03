@@ -71,6 +71,11 @@ def parse_types(Results):
 
 		print("Please enter a valid number.")
 
+""" ticket_sales: Takes original ROI """ 
+def ticket_sales(orig_ROI):
+
+	return .16 * orig_ROI
+
 
 """ Automation function: takes box office employee wage and hrs/week saved """
 def automation(wage, hrs_saved):
@@ -141,22 +146,44 @@ def donations(TPY):
 		return 12 * 399.0 
 
 
-""" Final print """
-def print_ROI(ROI_breakdown): 
+""" Final print if all fields satisfied"""
+def print_all(ROI_breakdown): 
 
-	length = len(ROI_breakdown)
-
-	print("Increase revenue by " + str(ROI_breakdown["Total"]) + " with Vendini!")
+	print("Increase revenue by " + str(ROI_breakdown["Total"]) + " in total with Vendini!")
+	print("Increase revenue from ticket sales by " + str(ROI_breakdown["Ticket Sales"]) + ".")
 	print("Increase revenue from Online Sales by " + str(ROI_breakdown["Online Sales"]) + ".")
 	print("Save " + str(ROI_breakdown["Email Marketing"]) + " with Vendini's built-in Email Marketing Solutions.")
 	print("Save " + str(ROI_breakdown["Automation"]) + " with Box Office Automation.")
 	print("Save " + str(ROI_breakdown["Donations"]) + " with Vendini's CRM and Donation Management Solutions.")
 	print("Increase revenue by " + str(ROI_breakdown["Social Media"]) + " and publicize your events with Social Media.")
 
+def Univ_print(ROI_breakdown):
+
+	print("Increase revenue by " + str(ROI_breakdown["Total"]) + " in total with Vendini!")
+	print("Increase revenue from ticket sales by " + str(ROI_breakdown["Ticket Sales"]) + ".")
+	print("Save " + str(ROI_breakdown["Automation"]) + " with Box Office Automation.")
+	print("Increase revenue from Online Sales by " + str(ROI_breakdown["Online Sales"]) + ".")
+
+def Fest_print(ROI_breakdown):
+
+	print("Increase revenue by " + str(ROI_breakdown["Total"]) + " in total with Vendini!")
+	print("Increase revenue from ticket sales by " + str(ROI_breakdown["Ticket Sales"]) + ".")
+	print("Increase revenue by " + str(ROI_breakdown["Social Media"]) + " and publicize your events with Social Media.")
+	print("Increase revenue from Online Sales by " + str(ROI_breakdown["Online Sales"]) + ".")
+	print("Save " + str(ROI_breakdown["Email Marketing"]) + " with Vendini's built-in Email Marketing Solutions.")
+
+def Live_print(ROI_breakdown):
+
+	print("Increase revenue by " + str(ROI_breakdown["Total"]) + " in total with Vendini!")
+	print("Increase revenue from ticket sales by " + str(ROI_breakdown["Ticket Sales"]) + ".")
+	print("Increase revenue by " + str(ROI_breakdown["Social Media"]) + " and publicize your events with Social Media.")
+	print("Save " + str(ROI_breakdown["Email Marketing"]) + " with Vendini's built-in Email Marketing Solutions.")
+
 """ General: takes input of General venue info, calculates and saves relevant revenue numbers """
 def General(input):
 
 	ROI_breakdown = {}
+	ROI_breakdown["Ticket Sales"] = ticket_sales(input["orig_ROI"])
 	ROI_breakdown["Automation"] = automation(input["Employee_wage"], 10)
 	ROI_breakdown["Social Media"] = social_media(input["TPY"], input["Type"])
 	ROI_breakdown["Online Sales"] = online_sales(input["TPY"], input["TPrice"], .80)
@@ -169,6 +196,7 @@ def General(input):
 def Performing_arts(input):
 
 	ROI_breakdown = {}
+	ROI_breakdown["Ticket Sales"] = ticket_sales(input["orig_ROI"])
 	ROI_breakdown["Automation"] = automation(input["Employee_wage"], 25)
 	ROI_breakdown["Social Media"] = social_media(input["TPY"], input["Type"])
 	ROI_breakdown["Online Sales"] = online_sales(input["TPY"], input["TPrice"], .17)
@@ -181,31 +209,34 @@ def Performing_arts(input):
 def University(input):
 
 	ROI_breakdown = {}
+	ROI_breakdown["Ticket Sales"] = ticket_sales(input["orig_ROI"])
 	ROI_breakdown["Automation"] = automation(input["Employee_wage"], 12)
 	ROI_breakdown["Online Sales"] = online_sales(input["TPY"], input["TPrice"], .70)
 	ROI_breakdown["Email Marketing"] = marketing(input["Email_marketing"], input["TPY"])
 	ROI_breakdown["Total"] = sum(ROI_breakdown.values())
-	print_ROI(ROI_breakdown)
+	Univ_print(ROI_breakdown)
 
 """ Festival: takes input of Festival info, calculates and saves relevant revenue numbers """
 def Festival(input):
 
 	ROI_breakdown = {}
+	ROI_breakdown["Ticket Sales"] = ticket_sales(input["orig_ROI"])
 	ROI_breakdown["Social Media"] = social_media(input["TPY"], input["Type"])
 	ROI_breakdown["Online Sales"] = online_sales(input["TPY"], input["TPrice"], .30)
 	ROI_breakdown["Email Marketing"] = marketing(input["Email_marketing"], input["TPY"])
 	ROI_breakdown["Total"] = sum(ROI_breakdown.values())
-	print_ROI(ROI_breakdown)
+	Fest_print(ROI_breakdown)
 
 """ Live Music: takes input of Live Music info, calculates and saves relevant revenue numbers """
 def Live_Music(input):
 
-	ROI_breakdown = []
+	ROI_breakdown = {}
+	ROI_breakdown["Ticket Sales"] = ticket_sales(input["orig_ROI"])
 	ROI_breakdown["Automation"] = automation(input["Employee_wage"], 10)
 	ROI_breakdown["Social Media"] = social_media(input["TPY"], input["Type"])
 	ROI_breakdown["Email Marketing"] = marketing(input["Email_marketing"], input["TPY"])
 	ROI_breakdown["Total"] = sum(ROI_breakdown.values())
-	print_ROI(ROI_breakdown)
+	Live_Music(ROI_breakdown)
 
 if __name__ == '__main__':
 
