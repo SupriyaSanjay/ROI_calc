@@ -35,21 +35,57 @@
 				</select>
 				<br>
 
-				<label for="ROI">What is the average yearly revenue of your entertainment venue?</label>
+				<label for="ROI">What is the average yearly revenue of your entertainment venue?</label><br>
 				<input type="text" id="ROI" value=""><br>
+	
+				<label for="TPY">How many tickets does your venue sell yearly?</label><br>
+				<input type="text" id="TPY" value=""><br> 
 
+				<label for="TPrice">What is the average price of a ticket at your venue? </label><br>
+				<input type="text" id="TPrice" value=""><br>
+
+				<label for="Emplyee_wage">What does your average Box Office Employee earn, hourly?</label><br>
+				<input type="text" id="Emplyee_wage" value=""><br>
+
+				<label for="email_marketing">Choose which if the following e-mail marketing services you use</label><br>
+				<select id="email_marketing">
+					<option value="Mailchimp">Mailchimp</option>
+					<option value="Constant Contact">Constant Contact</option>
+					<option value="None">None</option>
+				</select>
+				<br>
 
 			</div>
 		</form>
-						<button onclick="get_data()">Calculate</button>
+		<button onclick="Calculate()">Calculate</button>
 
 		<div id="Output" class="form-group"></div>
 		<script>
-		function get_data() {
+		function Calculate() {
 
-				var ROI = document.getElementById("Revenue").elements[0].value;
-				var venue_type = document.getElementById("Revenue").elements[1].value
-				document.getElementById("Output").innerHTML = ROI + venue_type
+				var labeled_input = new Array();
+				labeled_input = set_data();
+				parse_input(labeled_input);
+
+				// Get data inputted and put in a labeled input array.
+				function set_data() {
+
+					var num_fields = 6;
+					var fields = ["Type", "orig_ROI", "TPY", "TPrice", "Employee_wage", "Email_marketing"];
+					var input = new Array()
+
+					for (i = 0; i < num_fields; i++) {
+						input[fields[i]] = document.getElementById("Revenue").elements[i].value;
+					}
+
+					return input;
+				}
+
+				function 
+				
+
+				
+				
 
 
 		}
