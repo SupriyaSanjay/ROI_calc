@@ -64,8 +64,8 @@
 		function Calculate() {
 
 				var labeled_input = new Array();
-				labeled_input = set_data();
-				parse_input(labeled_input);
+				labeled_input = set_data(); // Set data
+				parse_input(labeled_input); // Parse types of venues
 
 				// Get data inputted and put in a labeled input array.
 				function set_data() {
@@ -81,6 +81,7 @@
 					return input;
 				}
 
+				//Parses inputs for type of venue
 				function parse_input(labeled_input) {
 
 					if ((labeled_input["Type"] == "Night Club, Promoter") || (labeled_input["Type"] == "Live Music")) {
@@ -112,28 +113,24 @@
 
 						labeled_input["Type"] = 1;
 						console.log("Found general");
-						// call general 
-						console.log(ticket_sales(labeled_input["orig_ROI"]));
-						console.log(automation(labeled_input["Employee_wage"], 10));
-						console.log(social_media(labeled_input["TPY"], labeled_input["Type"]));
-						console.log(online_sales(labeled_input["TPY"], labeled_input["TPrice"], .80));
-						console.log(marketing(labeled_input["Email_marketing"], labeled_input["TPY"]));
-						console.log(donations(labeled_input["TPY"]));
+						General(labeled_input);						
 					}
 				}
 				
-
+				// Helper function: Calculates ROI from ticket sales
 				function ticket_sales(orig_ROI) {
 
 					return .16 * orig_ROI;
 
 				}
 
+				// Helper function: Calculates hours saved from automation
 				function automation(wage, hrs_saved) {
 					return hrs_saved * wage * 52; 
 
 				}
 
+				// Helper function: Calculates ROI from social media
 				function social_media(TPY, type) {
 
 					if ((type == 2) || (type == 1) || (type == 4)) {
@@ -145,6 +142,7 @@
 		
 				}
 
+				// Helper function: Calculates ROI from online sales, because of fee
 				function online_sales(TPY, TPrice, rate){
 
 					//tickets sold online sell for 6.3% higher 
@@ -152,7 +150,7 @@
 
 				}
 
-				// Marketing: Takes email marketing type and TPY
+				// Helper function: Calculates money saved from email marketing manager
 				function marketing(email_marketing, TPY){
 
 					// 1 = Mailchimp 2 = Constant contact 3 = None """
@@ -178,7 +176,7 @@
 	
 				}
 
-				// donations: Takes TPY  
+				// Helper functions: Calculates money saved from donations manager 
 				function donations(TPY){
 
 					if (TPY <= 2000) { 
@@ -195,7 +193,32 @@
 					}
 				}
 
-				
+				// General: Fill in ROI_breakdown array with values, call helpers.
+				function General(labeled_input) {
+
+					ROI_breakdown = new Array();
+					var Total_ROI = 0;
+					ROI_breakdown["Ticket_Sales"] = ticket_sales(labeled_input["orig_ROI"]);
+					Total_ROI += ROI_breakdown["Ticket_Sales"];
+					console.log(ROI_breakdown["Ticket_Sales"]);
+					ROI_breakdown["Automation"] = automation(labeled_input["Employee_wage"], 10);
+					Total_ROI += ROI_breakdown["Automation"];
+					console.log(ROI_breakdown["Automation"]);
+					ROI_breakdown["Social_Media"] = social_media(labeled_input["TPY"], labeled_input["Type"]);
+					Total_ROI += ROI_breakdown["Social_Media"];
+					console.log(ROI_breakdown["Social_Media"]);
+					ROI_breakdown["Online_Sales"] = online_sales(labeled_input["TPY"], labeled_input["TPrice"], .80);
+					Total_ROI += ROI_breakdown["Online_Sales"];
+					console.log(ROI_breakdown["Online_Sales"]);
+					ROI_breakdown["Email_marketing"] = marketing(labeled_input["Email_marketing"], labeled_input["TPY"]);
+					Total_ROI += ROI_breakdown["Email_marketing"];
+					console.log(ROI_breakdown["Email_marketing"]);
+					ROI_breakdown["Donations"] = donations(labeled_input["TPY"]);
+					Total_ROI += ROI_breakdown["Donations"];
+					console.log(ROI_breakdown["Donations"]);
+					ROI_breakdown["Total"] = Total_ROI;
+					console.log(ROI_breakdown["Total"]);
+				}
 			
 		}
 
