@@ -81,13 +81,122 @@
 					return input;
 				}
 
-				function 
+				function parse_input(labeled_input) {
+
+					if ((labeled_input["Type"] == "Night Club, Promoter") || (labeled_input["Type"] == "Live Music")) {
+
+						labeled_input["Type"] = 2;
+						console.log("Found live music venue");
+						//call live music
+
+					}
+					else if (labeled_input["Type"] == "Performing Arts") {
+
+						labeled_input["Type"] = 3;
+						console.log("Found PA");
+						//call performing arts 
+					}
+					else if (labeled_input["Type"] == "Festival") {
+
+						labeled_input["Type"] = 4;
+						console.log("Found festival");
+						//festival 
+					}
+					else if (labeled_input["Type"] == "University") {
+
+						labeled_input["Type"] = 5;
+						console.log("Found university");
+						// university 
+					}
+					else {
+
+						labeled_input["Type"] = 1;
+						console.log("Found general");
+						// call general 
+						console.log(ticket_sales(labeled_input["orig_ROI"]));
+						console.log(automation(labeled_input["Employee_wage"], 10));
+						console.log(social_media(labeled_input["TPY"], labeled_input["Type"]));
+						console.log(online_sales(labeled_input["TPY"], labeled_input["TPrice"], .80));
+						console.log(marketing(labeled_input["Email_marketing"], labeled_input["TPY"]));
+						console.log(donations(labeled_input["TPY"]));
+					}
+				}
 				
 
-				
-				
+				function ticket_sales(orig_ROI) {
 
+					return .16 * orig_ROI;
 
+				}
+
+				function automation(wage, hrs_saved) {
+					return hrs_saved * wage * 52; 
+
+				}
+
+				function social_media(TPY, type) {
+
+					if ((type == 2) || (type == 1) || (type == 4)) {
+						return (TPY * (4.49 + 2.29));
+					}
+					else if (type == 3) {
+						return (TPY * (4.01 + 0.72));
+					}
+		
+				}
+
+				function online_sales(TPY, TPrice, rate){
+
+					//tickets sold online sell for 6.3% higher 
+					return (rate * TPY) * (TPrice * .063);
+
+				}
+
+				// Marketing: Takes email marketing type and TPY
+				function marketing(email_marketing, TPY){
+
+					// 1 = Mailchimp 2 = Constant contact 3 = None """
+					if (email_marketing == "Mailchimp") {
+						if (TPY > 15000) {
+					 		return 12 * 199.0;
+						}
+						else {
+							return 12 * 10.0;
+						}
+					} 
+					else if (email_marketing == "Constant Contact") {
+						if (TPY <= 5000) {
+							return 12 * 95.0;
+						}
+						else { 
+							return 12 * 125.0;
+						}
+					}
+					else {
+						return 0;
+					}
+	
+				}
+
+				// donations: Takes TPY  
+				function donations(TPY){
+
+					if (TPY <= 2000) { 
+						return 12 * 99.0;
+					}
+					else if (2000 < TPY <= 5000) {
+						return 12 * 199.0;
+					}
+					else if (5000 < TPY <= 15000) {
+						return 12 * 299.0;
+					}
+					else {
+						return 12 * 399.0;
+					}
+				}
+
+				
+			
 		}
 
 		</script>
