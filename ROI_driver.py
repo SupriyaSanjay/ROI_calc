@@ -203,7 +203,7 @@ def Performing_arts(input):
 	ROI_breakdown["Email Marketing"] = marketing(input["Email_marketing"], input["TPY"])
 	ROI_breakdown["Donations"] = donations(input["TPY"])
 	ROI_breakdown["Total"] = sum(ROI_breakdown.values())
-	print_ROI(ROI_breakdown)
+	print_all(ROI_breakdown)
 
 """ University: takes input of University venue info, calculates and saves relevant revenue numbers """
 def University(input):
