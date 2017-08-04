@@ -1,0 +1,25 @@
+/* Stylesheet for ROI_Calc */
+
+
+#questions {
+	background-color: #696969;
+}
+.question-container {
+	text-align: center;
+} 
+
+.form-group {
+	font-size: 20pt;
+	color: #ffffff;
+}
+
+h1 {
+	font-size: 30pt;
+	color: #ffffff;
+} 
+
+body {
+	font-family: "Open Sans";
+	font-size: 16pt;
+}
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Vendini ROI Calculator</title>
+<meta charset="utf-8" />
+<link href="ROI_style.css" rel="stylesheet" type="text/css"/>
+
+</head>
+
+<body>
+
+<section id="questions">
+	<div class="question-container">
+		<h1>Calculate how much more money you can make with Vendini</h1>
+
+		<form id="Revenue" href="javascript:;">
+			<div class="form-group">
+				<label for="venue_type">What type of venue do you own</label><br>
+				<select id="venue_type">
+					<option value="Arena, Conference Center, Expo">Arena, Conference Center, Expo</option>
+					<option value="Casino">Casino</option>
+					<option value="Fair, Attraction, Rodeo">Fair, Attraction, Rodeo</option>
+					<option value="K-12">K-12</option>
+					<option value="Comedy, Mixed Use Venue">Comedy, Mixed Use Venue</option>
+					<option value="Museum, Tours">Museum, Tours</option>
+					<option value="Professional Sports">Professional Sports</option>
+					<option value="Live Music">Live Music</option>
+					<option value="Night Club, Promoter">Night Club, Promoter</option>
+					<option value="Performing Arts">Performing Arts</option>
+					<option value="Festival">Festival</option>
+					<option value="University">University</option>
+				</select>
+				<br>
+
+				<label for="ROI">What is the average yearly revenue of your entertainment venue?</label>
+				<input type="text" id="ROI" value=""><br>
+
+
+			</div>
+		</form>
+						<button onclick="get_data()">Calculate</button>
+
+		<div id="Output" class="form-group"></div>
+		<script>
+		function get_data() {
+
+				var ROI = document.getElementById("Revenue").elements[0].value;
+				var venue_type = document.getElementById("Revenue").elements[1].value
+				document.getElementById("Output").innerHTML = ROI + venue_type
+
+
+		}
+
+		</script>
+
+
+	</div>
+</section>
+
+</body>
+
+</html>
