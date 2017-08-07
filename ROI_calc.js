@@ -3,7 +3,17 @@ function Calculate() {
 				var labeled_input = new Array();
 				labeled_input = set_data(); // Set data
 				parse_input(labeled_input); // Parse types of venues
+				display();
 
+				function display() {
+					var responses = document.getElementById("responses");
+					if (responses.style.display == 'none') {
+						responses.style.display = 'block';
+					}
+					else {
+						responses.style.display = 'none';
+					}
+				}
 				// Get data inputted and put in a labeled input array.
 				function set_data() {
 
