@@ -2,8 +2,19 @@ function Calculate() {
 
 				var labeled_input = new Array();
 				labeled_input = set_data(); // Set data
-				parse_input(labeled_input); // Parse types of venues
-				display_all();
+				venue_type = parse_input(labeled_input); // Parse types of venues
+				if (venue_type == "Live_Music") {
+					display_live();
+				}
+				else if (venue_type == "University") {
+					display_univ();
+				}
+				else if (venue_type == "Festival") {
+					display_fest();
+				}
+				else if (venue_type == "General") {
+					display_all();
+				}
 
 				function display_all() {
 					var element_ID = ["Total-ROI","Ticket-Sales","Online-Sales","Email-marketing","automation","donations","Social-Media"];
@@ -16,8 +27,50 @@ function Calculate() {
 						else {
 							final_ROI.style.display = 'none';
 						}	
+					}			
+				}
+
+				function display_univ() {
+					var element_ID = ["Total-ROI","Ticket-Sales","Online-Sales","automation"];
+					for (var i = 0; i < 4; i++) {
+
+						var final_ROI = document.getElementById(element_ID[i]);
+						if (final_ROI.style.display == 'none') {
+							final_ROI.style.display = 'block';
+						}
+						else {
+							final_ROI.style.display = 'none';
+						}	
 					}
-					
+				}
+
+				function display_fest() {
+					var element_ID = ["Total-ROI","Ticket-Sales","Online-Sales","Social-Media", "Email-marketing"];
+					for (var i = 0; i < 5; i++) {
+
+						var final_ROI = document.getElementById(element_ID[i]);
+						if (final_ROI.style.display == 'none') {
+							final_ROI.style.display = 'block';
+						}
+						else {
+							final_ROI.style.display = 'none';
+						}	
+					}
+				}
+
+				function display_live() {
+
+					var element_ID = ["Total-ROI","Ticket-Sales","Social-Media","Email-marketing"];
+					for (var i = 0; i < 4; i++) {
+
+						var final_ROI = document.getElementById(element_ID[i]);
+						if (final_ROI.style.display == 'none') {
+							final_ROI.style.display = 'block';
+						}
+						else {
+							final_ROI.style.display = 'none';
+						}	
+					}
 				}
 
 				// Get data inputted and put in a labeled input array.
@@ -40,33 +93,33 @@ function Calculate() {
 					if ((labeled_input["Type"] == "Night Club, Promoter") || (labeled_input["Type"] == "Live Music")) {
 
 						labeled_input["Type"] = 2;
-						console.log("Found live music venue");
 						Live_Music(labeled_input);
+						return "Live_Music";
 
 					}
 					else if (labeled_input["Type"] == "Performing Arts") {
 
 						labeled_input["Type"] = 3;
-						console.log("Found PA");
 						Performing_Arts(labeled_input);
+						return "Performing_Arts";
 					}
 					else if (labeled_input["Type"] == "Festival") {
 
 						labeled_input["Type"] = 4;
-						console.log("Found festival");
 						Festival(labeled_input);
+						return "Festival";
 					}
 					else if (labeled_input["Type"] == "University") {
 
 						labeled_input["Type"] = 5;
-						console.log("Found university");
 						University(labeled_input);
+						return "University";
 					}
 					else {
 
 						labeled_input["Type"] = 1;
-						console.log("Found general");
-						General(labeled_input);						
+						General(labeled_input);	
+						return "General";					
 					}
 				}
 				
