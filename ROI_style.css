@@ -9,15 +9,70 @@
 } 
 
 .form-group {
-	font-size: 20pt;
+	font-size: 16pt;
 	color: #ffffff;
 }
 
 #responses {
-	background-color: #a8ff00;
 	display:none;
+	position: relative;
 }
 
+.Total-ROI {
+	background-color: #79be25;
+	background-size: 100% 100%;
+	margin: 20px;
+	position: relative;
+	padding: 100px;
+}
+
+.Ticket-Sales {
+	background-color: #d3d3d3;
+	background-size: 100% 100%;
+	margin: 20px;
+	position: relative;
+	padding: 100px;
+}
+
+.Online-Sales {
+	background-color: #79be25;
+	background-size: 100% 100%;
+	margin: 20px;
+	position: relative;
+	padding: 100px;
+}
+
+.Email-marketing {
+	background-color: #d3d3d3;
+	background-size: 100% 100%;
+	margin: 20px;
+	position: relative;
+	padding: 100px;
+}
+
+.automation {
+	background-color: #79be25;
+	background-size: 100% 100%;
+	margin: 20px;
+	position: relative;
+	padding: 100px;
+}
+
+.donations {
+	background-color:#d3d3d3; 
+	background-size: 100% 100%;
+	margin: 20px;
+	position: relative;
+	padding: 100px;
+}
+
+.Social-Media {
+	background-color: #79be25;
+	background-size: 100% 100%;
+	margin: 20px;
+	position: relative;
+	padding: 100px;
+}
 .response-container {
 	text-align: left;
 }
@@ -31,10 +86,13 @@
 h1 {
 	font-size: 30pt;
 	color: #ffffff;
+	font-weight: lighter;
+
 } 
 
 body {
 	font-family: "Open Sans";
 	font-size: 16pt;
+	font-weight: lighter;
 }
 
