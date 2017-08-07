@@ -13,6 +13,20 @@
 	color: #ffffff;
 }
 
+#responses {
+	background-color: #a8ff00;
+}
+
+.response-container {
+	text-align: left;
+}
+
+.answer-group {
+	font-size: 20 pt;
+	color: #ffffff;
+}
+
+
 h1 {
 	font-size: 30pt;
 	color: #ffffff;

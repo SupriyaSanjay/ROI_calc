@@ -14,7 +14,7 @@
 
 <section id="questions">
 	<div class="question-container">
-		<h1>Calculate how much more money you can make with Vendini</h1>
+	<h1>Calculate how much more money you can make with Vendini</h1>
 
 		<form id="Revenue" href="javascript:;">
 			<div class="form-group">
@@ -58,8 +58,13 @@
 			</div>
 		</form>
 		<button onclick="Calculate()">Calculate</button>
+	</div>
+<section id="responses"/>
+	<div class="response-container">
+	<div class="answer-group">
+		Increase your revenue by <span id="Total_ROI"></span> with Vendini
 
-		<div id="Output" class="form-group"></div>
+	</div>
 		<script>
 		function Calculate() {
 
@@ -217,6 +222,8 @@
 					Total_ROI += ROI_breakdown["Donations"];
 					console.log(ROI_breakdown["Donations"]);
 					ROI_breakdown["Total"] = Total_ROI;
+					var my_span = document.getElementById("Total_ROI");
+					my_span.textContent = Total_ROI;
 					console.log(ROI_breakdown["Total"]);
 				}
 			
