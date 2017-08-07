@@ -62,8 +62,13 @@
 <section id="responses"/>
 	<div class="response-container">
 	<div class="answer-group">
-		Increase your revenue by <span id="Total_ROI"></span> with Vendini
-
+		Increase your revenue by <span id="Total_ROI"></span> with Vendini!<br>
+		Increase revenue from ticket sales by <span id="Ticket_Sales"></span>.<br>
+		Increase revenue from online sales by <span id="Online_Sales"></span>.<br>
+		Save <span id="Email_marketing"></span> with Vendini's built-in email marketing solutions.<br>
+		Save <span id="Automation"></span> with box office automation.
+		Save <span id="Donations"></span> with Vendini's CRM and donation management solutions.<br>
+		Increase revenue by <span id="Social_Media"></span> by publicizing your events on social media with Vendini's integration.<br>
 	</div>
 		<script>
 		function Calculate() {
@@ -204,27 +209,32 @@
 					ROI_breakdown = new Array();
 					var Total_ROI = 0;
 					ROI_breakdown["Ticket_Sales"] = ticket_sales(labeled_input["orig_ROI"]);
+					document.getElementById("Ticket_Sales").textContent = ROI_breakdown["Ticket_Sales"];
 					Total_ROI += ROI_breakdown["Ticket_Sales"];
-					console.log(ROI_breakdown["Ticket_Sales"]);
+
 					ROI_breakdown["Automation"] = automation(labeled_input["Employee_wage"], 10);
+					document.getElementById("Automation").textContent = ROI_breakdown["Automation"];
 					Total_ROI += ROI_breakdown["Automation"];
-					console.log(ROI_breakdown["Automation"]);
+
+
 					ROI_breakdown["Social_Media"] = social_media(labeled_input["TPY"], labeled_input["Type"]);
+					document.getElementById("Social_Media").textContent = ROI_breakdown["Social_Media"];
 					Total_ROI += ROI_breakdown["Social_Media"];
-					console.log(ROI_breakdown["Social_Media"]);
+
 					ROI_breakdown["Online_Sales"] = online_sales(labeled_input["TPY"], labeled_input["TPrice"], .80);
+					document.getElementById("Online_Sales").textContent = ROI_breakdown["Online_Sales"];
 					Total_ROI += ROI_breakdown["Online_Sales"];
-					console.log(ROI_breakdown["Online_Sales"]);
+
 					ROI_breakdown["Email_marketing"] = marketing(labeled_input["Email_marketing"], labeled_input["TPY"]);
+					document.getElementById("Email_marketing").textContent = ROI_breakdown["Email_marketing"];
 					Total_ROI += ROI_breakdown["Email_marketing"];
-					console.log(ROI_breakdown["Email_marketing"]);
+
 					ROI_breakdown["Donations"] = donations(labeled_input["TPY"]);
+					document.getElementById("Donations").textContent = ROI_breakdown["Donations"];
 					Total_ROI += ROI_breakdown["Donations"];
-					console.log(ROI_breakdown["Donations"]);
+
 					ROI_breakdown["Total"] = Total_ROI;
-					var my_span = document.getElementById("Total_ROI");
-					my_span.textContent = Total_ROI;
-					console.log(ROI_breakdown["Total"]);
+					document.getElementById("Total_ROI").textContent = Total_ROI;
 				}
 			
 		}
