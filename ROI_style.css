@@ -56,6 +56,10 @@
 	display: none;
 }
 
+.subtitle {
+	font-size: 10pt;
+}
+
 .automation {
 	background-color: #79be25;
 	background-size: 100% 100%;
