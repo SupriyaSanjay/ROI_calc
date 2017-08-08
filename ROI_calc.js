@@ -4,72 +4,81 @@ function Calculate() {
 				labeled_input = set_data(); // Set data
 				venue_type = parse_input(labeled_input); // Parse types of venues
 				if (venue_type == "Live_Music") {
-					display_live();
+					display_live(labeled_input);
 				}
 				else if (venue_type == "University") {
-					display_univ();
+					display_univ(labeled_input);
 				}
 				else if (venue_type == "Festival") {
-					display_fest();
+					display_fest(labeled_input);
 				}
-				else if (venue_type == "General") {
-					display_all();
+				else if (venue_type == "General" || venue_type == "Performing_Arts") {
+					display_all(labeled_input);
 				}
 
-				function display_all() {
+				function display_all(labeled_input) {
 					var element_ID = ["Total-ROI","Ticket-Sales","Online-Sales","Email-marketing","automation","donations","Social-Media"];
 					for (var i = 0; i < 7; i++) {
-
 						var final_ROI = document.getElementById(element_ID[i]);
-						if (final_ROI.style.display == 'none') {
-							final_ROI.style.display = 'block';
-						}
-						else {
+						final_ROI.style.display = 'block';
+						if (i == 3 && labeled_input["Email_marketing"] == "None") {
 							final_ROI.style.display = 'none';
 						}	
 					}			
 				}
 
 				function display_univ() {
-					var element_ID = ["Total-ROI","Ticket-Sales","Online-Sales","automation"];
-					for (var i = 0; i < 4; i++) {
+					var element_ID = ["Total-ROI","Ticket-Sales","Online-Sales","automation","Email-marketing","donations","Social-Media"];
+					for (var i = 0; i < 7; i++) {
 
 						var final_ROI = document.getElementById(element_ID[i]);
-						if (final_ROI.style.display == 'none') {
+						if (i < 4) {
 							final_ROI.style.display = 'block';
 						}
-						else {
+						else if (i == 3 && labeled_input["Email_marketing"] == "None") {
 							final_ROI.style.display = 'none';
-						}	
-					}
+						}
+						else {
+							final_ROI.style.display = 'none';	
+						}
+
+					}							
 				}
 
 				function display_fest() {
-					var element_ID = ["Total-ROI","Ticket-Sales","Online-Sales","Social-Media", "Email-marketing"];
-					for (var i = 0; i < 5; i++) {
+					var element_ID = ["Total-ROI","Ticket-Sales","Online-Sales","Social-Media", "Email-marketing", "donations","automation"];
+					for (var i = 0; i < 7; i++) {
 
 						var final_ROI = document.getElementById(element_ID[i]);
-						if (final_ROI.style.display == 'none') {
+						if (i < 5) {
 							final_ROI.style.display = 'block';
+							if (i == 4 && labeled_input["Email_marketing"] == "None") {
+								final_ROI.style.display = 'none';
+							}
 						}
 						else {
-							final_ROI.style.display = 'none';
+							final_ROI.style.display = 'none';	
 						}	
+
 					}
 				}
 
 				function display_live() {
 
-					var element_ID = ["Total-ROI","Ticket-Sales","Social-Media","Email-marketing"];
-					for (var i = 0; i < 4; i++) {
+					var element_ID = ["Total-ROI","Ticket-Sales","Social-Media","Email-marketing","donations","automation","Online-Sales"];
+					for (var i = 0; i < 7; i++) {
 
 						var final_ROI = document.getElementById(element_ID[i]);
-						if (final_ROI.style.display == 'none') {
+						if (i < 4) {
 							final_ROI.style.display = 'block';
+							if (i == 3 && labeled_input["Email_marketing"] == "None") {
+							final_ROI.style.display = 'none';
+							}
 						}
 						else {
-							final_ROI.style.display = 'none';
-						}	
+							final_ROI.style.display = 'none';	
+						}
+
 					}
 				}
 
@@ -81,9 +90,14 @@ function Calculate() {
 					var input = new Array()
 
 					for (i = 0; i < num_fields; i++) {
-						input[fields[i]] = document.getElementById("Revenue").elements[i].value;
+						var field_input = document.getElementById("Revenue")
+						if (i == 3 || i == 4) {
+							input[fields[i]] = accounting.unformat(field_input.elements[i].value);
+						}
+						else {
+							input[fields[i]] = field_input.elements[i].value;	
+						}				
 					}
-
 					return input;
 				}
 
@@ -203,35 +217,35 @@ function Calculate() {
 				function General(labeled_input) {
 
 					ROI_breakdown = new Array();
-					var Total_ROI = 0;
+					var Total_ROI = 0.0;
 
 					ROI_breakdown["Ticket_Sales"] = ticket_sales(labeled_input["orig_ROI"]);
-					document.getElementById("Ticket_Sales").textContent = ROI_breakdown["Ticket_Sales"];
+					document.getElementById("Ticket_Sales").textContent = accounting.formatMoney(ROI_breakdown["Ticket_Sales"]);
 					Total_ROI += ROI_breakdown["Ticket_Sales"];
 
 					ROI_breakdown["Automation"] = automation(labeled_input["Employee_wage"], 10);
-					document.getElementById("Automation").textContent = ROI_breakdown["Automation"];
+					document.getElementById("Automation").textContent = accounting.formatMoney(ROI_breakdown["Automation"]);
 					Total_ROI += ROI_breakdown["Automation"];
 
 
 					ROI_breakdown["Social_Media"] = social_media(labeled_input["TPY"], labeled_input["Type"]);
-					document.getElementById("Social_Media").textContent = ROI_breakdown["Social_Media"];
+					document.getElementById("Social_Media").textContent = accounting.formatMoney(ROI_breakdown["Social_Media"]);
 					Total_ROI += ROI_breakdown["Social_Media"];
 
 					ROI_breakdown["Online_Sales"] = online_sales(labeled_input["TPY"], labeled_input["TPrice"], .80);
-					document.getElementById("Online_Sales").textContent = ROI_breakdown["Online_Sales"];
+					document.getElementById("Online_Sales").textContent = accounting.formatMoney(ROI_breakdown["Online_Sales"]);
 					Total_ROI += ROI_breakdown["Online_Sales"];
 
 					ROI_breakdown["Email_marketing"] = marketing(labeled_input["Email_marketing"], labeled_input["TPY"]);
-					document.getElementById("Email_marketing").textContent = ROI_breakdown["Email_marketing"];
+					document.getElementById("Email_marketing").textContent = accounting.formatMoney(ROI_breakdown["Email_marketing"]);
 					Total_ROI += ROI_breakdown["Email_marketing"];
 
 					ROI_breakdown["Donations"] = donations(labeled_input["TPY"]);
-					document.getElementById("Donations").textContent = ROI_breakdown["Donations"];
+					document.getElementById("Donations").textContent = accounting.formatMoney(ROI_breakdown["Donations"]);
 					Total_ROI += ROI_breakdown["Donations"];
 
-					ROI_breakdown["Total"] = Total_ROI;
-					document.getElementById("Total_ROI").textContent = Total_ROI;
+					ROI_breakdown["Total"] = accounting.formatMoney(Total_ROI);
+					document.getElementById("Total_ROI").textContent = ROI_breakdown["Total"];
 				}
 
 				function Performing_Arts(labeled_input) {
@@ -240,32 +254,32 @@ function Calculate() {
 					var Total_ROI = 0;
 
 					ROI_breakdown["Ticket_Sales"] = ticket_sales(labeled_input["orig_ROI"]);
-					document.getElementById("Ticket_Sales").textContent = ROI_breakdown["Ticket_Sales"];
+					document.getElementById("Ticket_Sales").textContent = accounting.formatMoney(ROI_breakdown["Ticket_Sales"]);
 					Total_ROI += ROI_breakdown["Ticket_Sales"];
 
 					ROI_breakdown["Automation"] = automation(labeled_input["Employee_wage"], 10);
-					document.getElementById("Automation").textContent = ROI_breakdown["Automation"];
+					document.getElementById("Automation").textContent = accounting.formatMoney(ROI_breakdown["Automation"]);
 					Total_ROI += ROI_breakdown["Automation"];
 
 
 					ROI_breakdown["Social_Media"] = social_media(labeled_input["TPY"], labeled_input["Type"]);
-					document.getElementById("Social_Media").textContent = ROI_breakdown["Social_Media"];
+					document.getElementById("Social_Media").textContent = accounting.formatMoney(ROI_breakdown["Social_Media"]);
 					Total_ROI += ROI_breakdown["Social_Media"];
 
 					ROI_breakdown["Online_Sales"] = online_sales(labeled_input["TPY"], labeled_input["TPrice"], .80);
-					document.getElementById("Online_Sales").textContent = ROI_breakdown["Online_Sales"];
+					document.getElementById("Online_Sales").textContent = accounting.formatMoney(ROI_breakdown["Online_Sales"]);
 					Total_ROI += ROI_breakdown["Online_Sales"];
 
 					ROI_breakdown["Email_marketing"] = marketing(labeled_input["Email_marketing"], labeled_input["TPY"]);
-					document.getElementById("Email_marketing").textContent = ROI_breakdown["Email_marketing"];
+					document.getElementById("Email_marketing").textContent = accounting.formatMoney(ROI_breakdown["Email_marketing"]);
 					Total_ROI += ROI_breakdown["Email_marketing"];
 
 					ROI_breakdown["Donations"] = donations(labeled_input["TPY"]);
-					document.getElementById("Donations").textContent = ROI_breakdown["Donations"];
+					document.getElementById("Donations").textContent = accounting.formatMoney(ROI_breakdown["Donations"]);
 					Total_ROI += ROI_breakdown["Donations"];
 
-					ROI_breakdown["Total"] = Total_ROI;
-					document.getElementById("Total_ROI").textContent = Total_ROI;
+					ROI_breakdown["Total"] = accounting.formatMoney(Total_ROI);
+					document.getElementById("Total_ROI").textContent = ROI_breakdown["Total"];
 				}
 
 				function University(labeled_input) {
@@ -274,23 +288,23 @@ function Calculate() {
 					var Total_ROI = 0;
 
 					ROI_breakdown["Ticket_Sales"] = ticket_sales(labeled_input["orig_ROI"]);
-					document.getElementById("Ticket_Sales").textContent = ROI_breakdown["Ticket_Sales"];
+					document.getElementById("Ticket_Sales").textContent = accounting.formatMoney(ROI_breakdown["Ticket_Sales"]);
 					Total_ROI += ROI_breakdown["Ticket_Sales"];
 
 					ROI_breakdown["Automation"] = automation(labeled_input["Employee_wage"], 10);
-					document.getElementById("Automation").textContent = ROI_breakdown["Automation"];
+					document.getElementById("Automation").textContent = accounting.formatMoney(ROI_breakdown["Automation"]);
 					Total_ROI += ROI_breakdown["Automation"];
 
 					ROI_breakdown["Online_Sales"] = online_sales(labeled_input["TPY"], labeled_input["TPrice"], .80);
-					document.getElementById("Online_Sales").textContent = ROI_breakdown["Online_Sales"];
+					document.getElementById("Online_Sales").textContent = accounting.formatMoney(ROI_breakdown["Online_Sales"]);
 					Total_ROI += ROI_breakdown["Online_Sales"];
 
 					ROI_breakdown["Email_marketing"] = marketing(labeled_input["Email_marketing"], labeled_input["TPY"]);
-					document.getElementById("Email_marketing").textContent = ROI_breakdown["Email_marketing"];
+					document.getElementById("Email_marketing").textContent = accounting.formatMoney(ROI_breakdown["Email_marketing"]);
 					Total_ROI += ROI_breakdown["Email_marketing"];
 
-					ROI_breakdown["Total"] = Total_ROI;
-					document.getElementById("Total_ROI").textContent = Total_ROI;
+					ROI_breakdown["Total"] = accounting.formatMoney(Total_ROI);
+					document.getElementById("Total_ROI").textContent = ROI_breakdown["Total"];
 				}
 
 				function Festival(labeled_input) {
@@ -299,48 +313,50 @@ function Calculate() {
 					var Total_ROI = 0;
 
 					ROI_breakdown["Ticket_Sales"] = ticket_sales(labeled_input["orig_ROI"]);
-					document.getElementById("Ticket_Sales").textContent = ROI_breakdown["Ticket_Sales"];
+					document.getElementById("Ticket_Sales").textContent = accounting.formatMoney(ROI_breakdown["Ticket_Sales"]);
 					Total_ROI += ROI_breakdown["Ticket_Sales"];
 
 					ROI_breakdown["Social_Media"] = social_media(labeled_input["TPY"], labeled_input["Type"]);
-					document.getElementById("Social_Media").textContent = ROI_breakdown["Social_Media"];
+					document.getElementById("Social_Media").textContent = accounting.formatMoney(ROI_breakdown["Social_Media"]);
 					Total_ROI += ROI_breakdown["Social_Media"];
 
 					ROI_breakdown["Online_Sales"] = online_sales(labeled_input["TPY"], labeled_input["TPrice"], .80);
-					document.getElementById("Online_Sales").textContent = ROI_breakdown["Online_Sales"];
+					document.getElementById("Online_Sales").textContent = accounting.formatMoney(ROI_breakdown["Online_Sales"]);
 					Total_ROI += ROI_breakdown["Online_Sales"];
 
 					ROI_breakdown["Email_marketing"] = marketing(labeled_input["Email_marketing"], labeled_input["TPY"]);
-					document.getElementById("Email_marketing").textContent = ROI_breakdown["Email_marketing"];
+					document.getElementById("Email_marketing").textContent = accounting.formatMoney(ROI_breakdown["Email_marketing"]);
 					Total_ROI += ROI_breakdown["Email_marketing"];
 
-					ROI_breakdown["Total"] = Total_ROI;
-					document.getElementById("Total_ROI").textContent = Total_ROI;
+					ROI_breakdown["Total"] = accounting.formatMoney(Total_ROI);
+					document.getElementById("Total_ROI").textContent = ROI_breakdown["Total"];
 				}
 
 				function Live_Music(labeled_input) {
 
 					ROI_breakdown = new Array();
-					var Total_ROI = 0;
+					var Total_ROI = 0.0;
 
 					ROI_breakdown["Ticket_Sales"] = ticket_sales(labeled_input["orig_ROI"]);
-					document.getElementById("Ticket_Sales").textContent = ROI_breakdown["Ticket_Sales"];
+					document.getElementById("Ticket_Sales").textContent = accounting.formatMoney(ROI_breakdown["Ticket_Sales"]);
 					Total_ROI += ROI_breakdown["Ticket_Sales"];
 
 					ROI_breakdown["Automation"] = automation(labeled_input["Employee_wage"], 10);
-					document.getElementById("Automation").textContent = ROI_breakdown["Automation"];
+					document.getElementById("Automation").textContent = accounting.formatMoney(ROI_breakdown["Automation"]);
 					Total_ROI += ROI_breakdown["Automation"];
 
+
 					ROI_breakdown["Social_Media"] = social_media(labeled_input["TPY"], labeled_input["Type"]);
-					document.getElementById("Social_Media").textContent = ROI_breakdown["Social_Media"];
+					document.getElementById("Social_Media").textContent = accounting.formatMoney(ROI_breakdown["Social_Media"]);
 					Total_ROI += ROI_breakdown["Social_Media"];
 
+
 					ROI_breakdown["Email_marketing"] = marketing(labeled_input["Email_marketing"], labeled_input["TPY"]);
-					document.getElementById("Email_marketing").textContent = ROI_breakdown["Email_marketing"];
+					document.getElementById("Email_marketing").textContent = accounting.formatMoney(ROI_breakdown["Email_marketing"]);
 					Total_ROI += ROI_breakdown["Email_marketing"];
 
-					ROI_breakdown["Total"] = Total_ROI;
-					document.getElementById("Total_ROI").textContent = Total_ROI;
+					ROI_breakdown["Total"] = accounting.formatMoney(Total_ROI);
+					document.getElementById("Total_ROI").textContent = ROI_breakdown["Total"];
 				}
 
 			
