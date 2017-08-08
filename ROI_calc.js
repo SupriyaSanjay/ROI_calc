@@ -1,9 +1,10 @@
 function Calculate() {
 
+				// Set and label inputted data
 				var labeled_input = new Array();
-				labeled_input = set_data(); // Set data
+				labeled_input = set_data(); 
 
-				/***Parse venue types, call corresponding calculate and display functions***/
+				//Parse venue types, call corresponding calculate and display functions
 				// Live Music
 				if ((labeled_input["Type"] == "Night Club, Promoter") || (labeled_input["Type"] == "Live Music")) {
 					labeled_input["Type"] = 2;
@@ -35,9 +36,8 @@ function Calculate() {
 					calculate_breakdown(labeled_input);
 					display_all(labeled_input);
 				}
-				/***************************End of parsing functions*****************/
 
-				// Gets data inputted and sets it in a labeled input array. Validates user input
+				// set_data: Gets data inputted and sets it in a labeled input array. Validates user input
 				function set_data() {
 					// Array of fields that will be used as labels
 					var num_fields = 6;
@@ -61,7 +61,7 @@ function Calculate() {
 					return input;
 				}
 
-				// Calculate_breakdown: Fill in ROI_breakdown array with values, call helpers.
+				// calculate_breakdown: Fill in ROI_breakdown array with values, call helpers.
 				function calculate_breakdown(labeled_input) {
 
 					ROI_breakdown = new Array(); // Holds separate aspects of ROI breakdown 
@@ -96,7 +96,7 @@ function Calculate() {
 					document.getElementById("Total_ROI").textContent = ROI_breakdown["Total"];
 				}
 
-				/***********Display Functions for All Venue Types ************/
+				//Display Functions for All Venue Types 
 				// Display_all: For General and PA venues, displays all fields. 
 				function display_all(labeled_input) {
 					// Holds all possible fields 
@@ -169,9 +169,8 @@ function Calculate() {
 						}
 					}
 				}
-				/***********************End of display functions ***************/
 
-				/************* Helper functions to calculate ROI ***********/
+				//Helper functions to calculate ROI
 				// ticket_sales: Calculates ROI from ticket sales
 				function ticket_sales(orig_ROI) {
 					return .16 * orig_ROI;
