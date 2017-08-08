@@ -1,4 +1,6 @@
 #ROI_calc
+
+~~~~~~~~~~~~~~~~~~~~~~~Overview~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Inputs are read into the labeled_inputs array, where indices are:
 ["Type", "orig_ROI", "TPY", "TPrice", "Employee_wage", "Email_marketing"] by 
 set_data() and the final array is returned.
@@ -39,7 +41,7 @@ or rates specific to member statistics. The functions then do specific
 calculations and return the amount of money saved or increase in ROI 
 that the specific factor would have. 
 
-Sources of data used in specific functions:
+~~~~~~~~~~Sources of data used in specific functions~~~~~~~~~~~~~~~~~
 Ticket Sales: 16% increase in revenue seen over 4 years in Thalian Hall
 
 Automation: Hours saved (parameter) is standardized to 10, Thalian Hall
@@ -55,3 +57,4 @@ TPY used to roughly determine # of records --> price of email marketing solution
 
 Donations: Donations numbers taken from Bloomerang's website. TPY used to determine
 # of records ---> price of solution. 
+

@@ -37,7 +37,7 @@ function Calculate() {
 				}
 				/***************************End of parsing functions*****************/
 
-				// Get data inputted and put in a labeled input array.
+				// Gets data inputted and sets it in a labeled input array. Validates user input
 				function set_data() {
 					// Array of fields that will be used as labels
 					var num_fields = 6;
