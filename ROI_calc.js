@@ -46,6 +46,11 @@ function Calculate() {
 					// Loop through document, get inputs and put in labeled array 
 					for (i = 0; i < num_fields; i++) {
 						var field_input = document.getElementById("Revenue")
+						// Check that all fields are filled in
+						if (!field_input.elements[i].value) {
+							alert("Please fill in all fields");
+							break;
+						}
 						if (i > 0 && i < 4) {
 							input[fields[i]] = accounting.unformat(field_input.elements[i].value);
 						}
