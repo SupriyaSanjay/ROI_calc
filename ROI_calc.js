@@ -89,7 +89,7 @@ function Calculate() {
 					document.getElementById("Social_Media").textContent = accounting.formatMoney(ROI_breakdown["Social_Media"]);
 					Total_ROI += ROI_breakdown["Social_Media"];
 
-					ROI_breakdown["Online_Sales"] = online_sales(labeled_input["TPY"], labeled_input["TPrice"], .80);
+					ROI_breakdown["Online_Sales"] = online_sales(labeled_input["TPY"], labeled_input["TPrice"], .20);
 					document.getElementById("Online_Sales").textContent = accounting.formatMoney(ROI_breakdown["Online_Sales"]);
 					Total_ROI += ROI_breakdown["Online_Sales"];
 

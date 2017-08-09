@@ -44,23 +44,34 @@ summed and displayed as the total.
 
  
 ~~~~~~~~~~Sources of data used in specific functions~~~~~~~~~~~~~~~~~
-Ticket Sales: 16% increase in revenue seen over 4 years in Thalian Hall
+Ticket Sales: 16% increase in revenue seen over 4 years in Thalian Hall, 
+so 4% yearly on average. 
+equation: orig_ROI * .04
 
 Automation: Hours saved (parameter) is standardized to 10, Thalian Hall
 saw box office hours cut by more than 10 hours/weekly 
+equation: hrs_saved * employee_wage * 52 
 
 Social Media: Monetary values of shares and likes on Facebook and Twitter
 for Music/Concerts and Performing Arts Venues. Data from Hubspot. Music/Concert
 applies to General, Live Music, and Festival. Performing Arts applies to only
 Performing Arts venues. 
+equation: 81% of TPY * (4.49 + 2.29) --> for General, Live Music, or Festival
+81% of TPY * (4.01 + 0.72) --> for Performing Arts and University 
 
 Marketing: Email Marketing numbers taken from Mailchimp and Constant Contact websites.
 TPY used to roughly determine # of records --> price of email marketing solution.
+equation: depending on TPY and email marketing solution
+12 * 199.0 OR 12 * 10.0 OR 12 * 95.0 OR 12 * 125.0 
 
 Donations: Donations numbers taken from Bloomerang's website. TPY used to determine
 # of records ---> price of solution. 
+equation: depending on TPY 
+12 * 99.0 OR 12 * 199.0 OR 12 * 299.0 OR 12 * 399.0
 
-Online Sales: Online tickets are sold with a 1.25 fee. 
+Online Sales: Online tickets are sold with a 1.25 fee, Villages ent. saw the percentage
+of online sales (out of total) grow from 3 to 20%. 
+equation: online sales * (Ticket price + 1.25)
 
 ~~~~~~~~~~~~~~~Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~
 Calculate: Driver for initial Calculate button. Returns labeled input.
