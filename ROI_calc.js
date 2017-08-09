@@ -78,9 +78,12 @@ function Calculate() {
 					document.getElementById("Ticket_Sales").textContent = accounting.formatMoney(ROI_breakdown["Ticket_Sales"]);
 					Total_ROI += ROI_breakdown["Ticket_Sales"];
 
-					ROI_breakdown["Automation"] = automation(labeled_input["Employee_wage"], 10);
-					document.getElementById("Automation").textContent = accounting.formatMoney(ROI_breakdown["Automation"]);
-					Total_ROI += ROI_breakdown["Automation"];
+					if (labeled_input["Type"] != 5 || labeled_input["Type"] != 4 || 
+						labeled_input["Type"] != 2) {
+						ROI_breakdown["Automation"] = automation(labeled_input["Employee_wage"], 10);
+						document.getElementById("Automation").textContent = accounting.formatMoney(ROI_breakdown["Automation"]);
+						Total_ROI += ROI_breakdown["Automation"];
+					}	
 
 					ROI_breakdown["Social_Media"] = social_media(labeled_input["TPY"], labeled_input["Type"]);
 					document.getElementById("Social_Media").textContent = accounting.formatMoney(ROI_breakdown["Social_Media"]);
@@ -94,9 +97,11 @@ function Calculate() {
 					document.getElementById("Email_marketing").textContent = accounting.formatMoney(ROI_breakdown["Email_marketing"]);
 					Total_ROI += ROI_breakdown["Email_marketing"];
 
-					ROI_breakdown["Donations"] = donations(labeled_input["TPY"]);
-					document.getElementById("Donations").textContent = accounting.formatMoney(ROI_breakdown["Donations"]);
-					Total_ROI += ROI_breakdown["Donations"];
+					if (labeled_input["Type"] == 1 || labeled_input["Type"] == 3) {
+						ROI_breakdown["Donations"] = donations(labeled_input["TPY"]);
+						document.getElementById("Donations").textContent = accounting.formatMoney(ROI_breakdown["Donations"]);
+						Total_ROI += ROI_breakdown["Donations"];
+					}
 
 					if (labeled_input["Type"] == 4) { // Festival
 						ROI_breakdown["Fest_extras"] = fest_extras();
@@ -143,11 +148,8 @@ function Calculate() {
 					if ((type == 2) || (type == 1) || (type == 4)) {
 						return (TPY * (4.49 + 2.29));
 					}
-					else if (type == 3) {
+					else if (type == 3 || type == 5) {
 						return (TPY * (4.01 + 0.72));
-					}
-					else { // Universities
-						return 0;
 					}
 				}
 				// online_sales: Calculates ROI from online sales, because of fee
@@ -254,7 +256,7 @@ function display_rest() {
 					for (var i = 0; i < 7; i++) {
 
 						var final_ROI = document.getElementById(element_ID[i]);
-						if (i < 4) {
+						if (i < 5) {
 							final_ROI.style.display = 'block';
 						}
 						// Checks if email marketing option was 'none'

@@ -2,13 +2,9 @@
 Supriya Sanjay
 9.8.17
 ~~~~~~~~~~~~~~~~~~~~~~~Overview~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Inputs are read into the labeled_inputs array, where indices are:
-["Type", "orig_ROI", "TPY", "TPrice", "Employee_wage", "Email_marketing"] by 
-set_data() and the final array is returned.
+Venue is categorized under one of the 5 larger verticals. 
 
-The types are then parsed and categorized into 5 larger categories. The
-mapping is as such: 
------General-----				
+-----General (1)-----				
 Arena, Conference Center/Expo
 Casino
 Fair, Attraction, Rodeo
@@ -18,30 +14,35 @@ Museum, Tours
 Other
 Professional Sports
 
-----Live Music---
+----Live Music (2)---
 Live Music
 Night Club, Promoter
 
----Festival---
+----Performing Arts (3)--
+Performing Arts 
+
+---Festival (4)---
 Festival
 
----University--
+---University (5)--
 University 
 
-According to the type, the calculate breakdown function is called
-and the corresponding display function. 
+Depending on larger vertical , different aspects of the ROI are displayed. 
+This is because varying venues are concerned with different factors that
+could contribute to ROI, such as donations or social media.  
+-----------
+General: All
+Performing Arts: All
+University: Ticket Sales, Online Sales, Automation, Email marketing, Social Media
+Festival: Ticket Sales, Online Sales, Social Media, Email Marketing, Festival extras
+Live Music: Ticket Sales, Online Sales, Email Marketing, Social Media 
+-----------
 
-The different display functions are used for different types of
-venues. Since varying venues are concerned with different factors that
-could contribute to ROI, such as donations or social media. Thus, the 
-different functions specify which factors should be printed and which 
-should not. 
+ROI calculations for each of the above categories is calculated based on
+data taken from Vendini members. The numbers from all categories are then 
+summed and displayed as the total. 
 
-The helper functions take certain parameters such as TPY, ticket price, 
-or rates specific to member statistics. The functions then do specific 
-calculations and return the amount of money saved or increase in ROI 
-that the specific factor would have. 
-
+ 
 ~~~~~~~~~~Sources of data used in specific functions~~~~~~~~~~~~~~~~~
 Ticket Sales: 16% increase in revenue seen over 4 years in Thalian Hall
 
@@ -60,3 +61,31 @@ Donations: Donations numbers taken from Bloomerang's website. TPY used to determ
 # of records ---> price of solution. 
 
 Online Sales: Online tickets are sold with a 1.25 fee. 
+
+~~~~~~~~~~~~~~~Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~
+Calculate: Driver for initial Calculate button. Returns labeled input.
+Inputs data into labeled array, parses type and assigns to one of 5 larger
+verticals (General, Live Music, University, Festival, Performing Arts). 
+Then calculates ROI and displays total.
+
+set_data: Takes input, puts in labeled array. Checks to make sure all 
+fields are filled, unformats numbers in currency form. 
+
+calculate_breakdown: Takes the labeled input. Calls
+helper functions and passes in rates/stats for calculations. Only 
+calls functions based off types. Totals the ROIs. 
+
+display_total: Displays total ROI, disappears the other factors. 
+
+The helper functions take certain parameters such as TPY, ticket price, 
+or rates specific to member statistics. The functions then do specific 
+calculations and return the amount of money saved or increase in ROI 
+that the specific factor would have.
+
+display_rest: Driver for Break it down button. Calls Calculate() 
+to get the labeled input, then parses it and calls specific display
+functions. 
+
+Display functions: All have an array of element_IDs, which hold the
+IDs for all possible factors of the ROI breakdown. Each function 
+loops through and prints only the necessary factors for each type. 
