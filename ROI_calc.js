@@ -1,3 +1,7 @@
+// called onclick of Calculate
+// stores input, calculates the breakdown for each
+// aspect of ROI, calls helper functions. Returns
+// labeled input and displays total. 
 function Calculate() {
 
 				// Set and label inputted data
@@ -245,7 +249,7 @@ function display_rest() {
 				//Display_Univ: For Universities, displays only select fields 
 				function display_univ(labeled_input) {
 					// Holds all fields, displays only first 4 
-					var element_ID = ["Ticket-Sales","Online-Sales","automation","Email-marketing","donations","Social-Media","Fest-extras"];
+					var element_ID = ["Ticket-Sales","Online-Sales","automation","Email-marketing","Social-Media","donations","Fest-extras"];
 					
 					for (var i = 0; i < 7; i++) {
 
