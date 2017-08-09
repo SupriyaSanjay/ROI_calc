@@ -59,3 +59,4 @@ TPY used to roughly determine # of records --> price of email marketing solution
 Donations: Donations numbers taken from Bloomerang's website. TPY used to determine
 # of records ---> price of solution. 
 
+Online Sales: Online tickets are sold with a 1.25 fee. 

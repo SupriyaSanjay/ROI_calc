@@ -88,6 +88,15 @@
 	display: none;
 
 }
+
+.Fest-extras {
+	background-color: #79be25;
+	background-size: 100% 100%;
+	margin: 20px;
+	position: relative;
+	padding: 100px;
+	display: none;
+}
 .response-container {
 	text-align: left;
 }
