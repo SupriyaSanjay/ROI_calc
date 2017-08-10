@@ -2,22 +2,58 @@
 
 
 #questions {
-	background-color: #696969;
+	background-color: #808080;
 }
 .question-container {
 	text-align: center;
-	font-size: 20 pt;
+	font-size: 15 pt;
 	color: #ffffff;
 } 
 
 .form-group {
-	font-size: 16pt;
+	font-size: 14pt;
 	color: #ffffff;
+	font-weight: lighter;
 }
 
 #responses {
 	display: none;
 	position: relative;
+}
+
+.button1 {
+	background-color: #79be25;
+	padding: 10px;
+	text-align: center;
+	border: none;
+}
+
+.button2 {
+	background-color: #ffffff;
+	padding: 10px;
+	text-align: center;
+	border: none;
+}
+
+.button3 {
+	background-color: #79be25;
+	padding: 10px;
+	text-align: center;
+	border: none;
+}
+
+.button2:hover {
+	background-color: #ffffff;
+}
+
+.button2:active {
+	background-color: #dcdcdc;
+	box-shadow: : 0 5px #666;
+	transform: translateY(2px);
+}
+
+.RFIDs {
+	display: none;
 }
 
 .Total-ROI {
@@ -107,6 +143,7 @@ h1 {
 	font-size: 30pt;
 	color: #ffffff;
 	font-weight: lighter;
+	text-align: center;
 
 } 
 

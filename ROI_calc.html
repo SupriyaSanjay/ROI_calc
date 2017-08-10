@@ -20,7 +20,7 @@
 
 		<form id="Revenue" href="javascript:;">
 			<div class="form-group">
-				<label for="venue_type">What type of venue do you own?</label><br>
+				<label for="venue_type">What type of business do you run?</label><br>
 				<select id="venue_type">
 					<option value="Arena, Conference Center, Expo">Arena, Conference Center, Expo</option>
 					<option value="Casino">Casino</option>
@@ -57,9 +57,27 @@
 				</select>
 				<br>
 
+				Do you use a software to manage donations?
+				<input type="radio" name="donations" value="y">Yes&nbsp<input type="radio" name="donations" value="n">No
+
+				<div class="RFIDs" id="RFIDs">Do you use RFIDs?</div>
+
+				<script>
+					var Answers = document.getElementById("Revenue");
+					var RFID = document.getElementById("RFIDs");
+					if (Answers.elements[0].value == "Festival") {
+						RFID.style.display = 'block';
+					}
+					else {
+						RFID.style.display = 'none';
+					}
+				</script>
+				<br>
 			</div>
 		</form>
-		<button onclick="Calculate()">Calculate</button>
+		<button class="button1" onclick="Calculate()">Calculate</button>
+		<br>
+		<br>
 	</div>
 </section>
 <br>
@@ -67,7 +85,7 @@
 	<div class="response-container" id="response-container">
 	<div class="Total-ROI" id="Total-ROI">
 		Increase your revenue by <span id="Total_ROI"></span> with Vendini!<br>
-		<button onclick="display_rest()">Break it down</button>
+		<button class="button2" onclick="display_rest()">Break it down</button>
 	</div>
 	<div class="Ticket-Sales" id="Ticket-Sales">
 		Increase revenue from ticket sales by <span id="Ticket_Sales"></span>.<br>

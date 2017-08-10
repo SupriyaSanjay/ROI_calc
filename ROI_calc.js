@@ -50,24 +50,32 @@ function Calculate() {
 // set_data: Gets data inputted and sets it in a labeled input array. Validates user input
 function set_data() {
 	// Array of fields that will be used as labels
-	var num_fields = 6;
-	var fields = ["Type", "orig_ROI", "TPY", "TPrice", "Employee_wage", "Email_marketing"];
+	var num_fields = 7;
+	var fields = ["Type", "orig_ROI", "TPY", "TPrice", "Employee_wage", "Email_marketing","donations"];
 	var input = new Array();
 
 	// Loop through document, get inputs and put in labeled array 
-	for (i = 0; i < num_fields; i++) {
+	for (i = 0; i < fields.length; i++) {
 		var field_input = document.getElementById("Revenue")
 		// Check that all fields are filled in
 		if (!field_input.elements[i].value) {
 			alert("Please fill in all fields");
 			return -1;
 		}
-		if (i > 0 && i < 4) {
+		if (i >= 0 && i < 4) {
 			input[fields[i]] = accounting.unformat(field_input.elements[i].value);
 		}
+		else if (i == 4 || i == 5) {
+			input[fields[i]] = field_input.elements[i].value;
+		}	
 		else {
-			input[fields[i]] = field_input.elements[i].value;	
-		}				
+			if (field_input.elements[i].checked) {
+				input[fields[i]] = 0 // true
+			}
+			else {
+				input[fields[i]] = 1; // false
+			}			
+		}			
 	}
 	
 	return input;
@@ -102,7 +110,7 @@ function calculate_breakdown(labeled_input) {
 	document.getElementById("Email_marketing").textContent = accounting.formatMoney(ROI_breakdown["Email_marketing"]);
 	Total_ROI += ROI_breakdown["Email_marketing"];
 
-	if (labeled_input["Type"] == 1 || labeled_input["Type"] == 3) { // If General or Performing Arts 
+	if (labeled_input["donations"] == 0) { 
 		ROI_breakdown["Donations"] = donations(labeled_input["TPY"]);
 		document.getElementById("Donations").textContent = accounting.formatMoney(ROI_breakdown["Donations"]);
 		Total_ROI += ROI_breakdown["Donations"];
