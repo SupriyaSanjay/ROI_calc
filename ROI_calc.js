@@ -257,22 +257,22 @@ function display_all(labeled_input) {
 //Display_Univ: For Universities, displays only select fields 
 function display_univ(labeled_input) {
 	// Holds all fields, displays only first 4 
-	var element_ID = ["Ticket-Sales","Online-Sales","automation","Email-marketing","Social-Media","donations","Fest-extras"];
-					
-		for (var i = 0; i < 7; i++) {
+	var element_ID = ["Ticket-Sales","Online-Sales","automation","Email-marketing","Social-Media","donations","Fest-extras"];	
+	
+	for (var i = 0; i < 7; i++) {
+		var final_ROI = document.getElementById(element_ID[i]);
 
-			var final_ROI = document.getElementById(element_ID[i]);
-			if (i < 5) {
-				final_ROI.style.display = 'block';
-			}
+		if (i < 5) {
+			final_ROI.style.display = 'block';
 			// Checks if email marketing option was 'none'
-			else if (i == 3 && labeled_input["Email_marketing"] == "None") { 
+			if (i == 3 && labeled_input["Email_marketing"] == 'None') { 
 				final_ROI.style.display = 'none';
 			}
-			else {
-				final_ROI.style.display = 'none';	
-			}
-		}							
+		}
+		else {
+			final_ROI.style.display = 'none';	
+		}
+	}							
 }
 
 // Display_fest: For Festivals, displays only select fields 
@@ -306,7 +306,7 @@ function display_live(labeled_input) {
 			if (i < 4) {
 				final_ROI.style.display = 'block';
 				// Checks if email marketing option was 'none'
-				if (i == 3 && labeled_input["Email_marketing"] == "None") {
+				if (i == 2 && labeled_input["Email_marketing"] == "None") {
 					final_ROI.style.display = 'none';
 				}
 			}
