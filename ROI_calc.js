@@ -1,11 +1,34 @@
+// 
+function extra_questions(venue_type) {
+
+	var RFID = document.getElementById("RFIDs");
+	var donate = document.getElementById("donate");
+
+	if (venue_type == "Festival") {
+		RFID.style.display = 'block';
+		RFID_res = true;
+	}
+	else {
+		RFID.style.display = 'none';
+	}
+	if (venue_type == "Performing Arts") {
+		donate.style.display = 'block';
+		donate_res = true;
+	}
+	else {
+		donate.style.display = 'none';
+	}
+}
+
+var labeled_input = new Array();
+
+
 // called onclick of Calculate
 // stores input, calculates the breakdown for each
 // aspect of ROI, calls helper functions. Returns
 // labeled input and displays total. 
 function Calculate() {
-
 				// Set and label inputted data
-				var labeled_input = new Array();
 				labeled_input = set_data(); 
 				if (labeled_input == -1) { // Check to make sure fields weren't empty
 					return;
@@ -32,7 +55,8 @@ function Calculate() {
 					display_total(labeled_input);
 				}
 				// Performing Arts 
-				else if (labeled_input["Type"] == "Performing_Arts") {
+				else if (labeled_input["Type"] == "Performing Arts") {
+					console.log("changing type to PA");
 					labeled_input["Type"] = 3;
 					calculate_breakdown(labeled_input);
 					display_total(labeled_input);
@@ -50,32 +74,41 @@ function Calculate() {
 // set_data: Gets data inputted and sets it in a labeled input array. Validates user input
 function set_data() {
 	// Array of fields that will be used as labels
-	var num_fields = 7;
-	var fields = ["Type", "orig_ROI", "TPY", "TPrice", "Employee_wage", "Email_marketing","donations"];
+	//var num_fields = 8;
+	var fields = ["Type", "orig_ROI", "TPY", "TPrice", "Employee_wage", "Email_marketing","donations","RFID"];
 	var input = new Array();
 
-	// Loop through document, get inputs and put in labeled array 
 	for (i = 0; i < fields.length; i++) {
 		var field_input = document.getElementById("Revenue")
+		
 		// Check that all fields are filled in
 		if (!field_input.elements[i].value) {
 			alert("Please fill in all fields");
 			return -1;
 		}
-		if (i >= 0 && i < 4) {
+
+		if (i > 0 && i < 4) { // For fields with currency 
 			input[fields[i]] = accounting.unformat(field_input.elements[i].value);
 		}
-		else if (i == 4 || i == 5) {
-			input[fields[i]] = field_input.elements[i].value;
-		}	
-		else {
-			if (field_input.elements[i].checked) {
-				input[fields[i]] = 0 // true
+		else if (i == 6) {
+			if (document.getElementById("donate_y").checked) {
+				input[fields[i]] = true;
 			}
 			else {
-				input[fields[i]] = 1; // false
-			}			
-		}			
+				input[fields[i]] = false; 
+			}
+		}
+		else if (i == 7) {
+			if (document.getElementById("rfid_y").checked) {
+				input[fields[i]] = true;
+			}
+			else {
+				input[fields[i]] = false; 
+			}
+		}	
+		else {
+			input[fields[i]] = field_input.elements[i].value;
+		}	
 	}
 	
 	return input;
@@ -110,13 +143,15 @@ function calculate_breakdown(labeled_input) {
 	document.getElementById("Email_marketing").textContent = accounting.formatMoney(ROI_breakdown["Email_marketing"]);
 	Total_ROI += ROI_breakdown["Email_marketing"];
 
-	if (labeled_input["donations"] == 0) { 
+
+	if (labeled_input["Type"] == 3 && labeled_input["donations"] == true) { // If using software for donations
+		console.log("about to write to donations id");
 		ROI_breakdown["Donations"] = donations(labeled_input["TPY"]);
 		document.getElementById("Donations").textContent = accounting.formatMoney(ROI_breakdown["Donations"]);
 		Total_ROI += ROI_breakdown["Donations"];
 	}
 
-	if (labeled_input["Type"] == 4) { // If Festival
+	if (labeled_input["Type"] == 4 && labeled_input["RFID"] == true) { // If Festival
 		ROI_breakdown["Fest_extras"] = fest_extras();
 		document.getElementById("Fest_extras").textContent = accounting.formatMoney(ROI_breakdown["Fest_extras"]);
 		Total_ROI += ROI_breakdown["Fest_extras"];
@@ -216,8 +251,8 @@ function donations(TPY){
 function display_rest() { 
 
 	// Save labeled inputs, parse types
-	labeled_input = new Array();
-	labeled_input = Calculate();
+	//labeled_input = new Array();
+	//labeled_input = Calculate();
 
 	// Live Music
 	if (labeled_input["Type"] == 2) {
@@ -229,6 +264,7 @@ function display_rest() {
 	}
 	// Festival
 	else if (labeled_input["Type"] == 4) {
+		console.log("about to print fest");
 		display_fest(labeled_input);
 	}
 	// Performing Arts 
@@ -237,6 +273,7 @@ function display_rest() {
 	}
 	// General
 	else {
+		console.log("is this happening?");
 		display_all(labeled_input);
 	}
 
@@ -254,6 +291,10 @@ function display_all(labeled_input) {
 		final_ROI.style.display = 'block';
 		// Checks if email marketing option was 'none'
 		if (i == 2 && labeled_input["Email_marketing"] == "None") {
+			final_ROI.style.display = 'none';
+		}
+		else if (i == 4 && labeled_input["donations"] == false) {
+			console.log("not displaying donations");
 			final_ROI.style.display = 'none';
 		}
 		else if (i == 6) { //Fest_extras should not be displayed
@@ -289,12 +330,14 @@ function display_fest(labeled_input) {
 	var element_ID = ["Ticket-Sales","Online-Sales","Social-Media", "Email-marketing","Fest-extras","donations","automation"];
 					
 		for (var i = 0; i < 7; i++) {
-
 			var final_ROI = document.getElementById(element_ID[i]);
 			if (i < 5) {
 				final_ROI.style.display = 'block';
 				// Checks if email marketing option was 'none'
 				if (i == 3 && labeled_input["Email_marketing"] == "None") {
+					final_ROI.style.display = 'none';
+				}
+				else if (i == 4 && labeled_input["RFID"] == false) {
 					final_ROI.style.display = 'none';
 				}
 			}

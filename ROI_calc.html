@@ -21,7 +21,7 @@
 		<form id="Revenue" href="javascript:;">
 			<div class="form-group">
 				<label for="venue_type">What type of business do you run?</label><br>
-				<select id="venue_type">
+				<select id="venue_type" onchange="extra_questions(this.value)">
 					<option value="Arena, Conference Center, Expo">Arena, Conference Center, Expo</option>
 					<option value="Casino">Casino</option>
 					<option value="Fair, Attraction, Rodeo">Fair, Attraction, Rodeo</option>
@@ -57,21 +57,17 @@
 				</select>
 				<br>
 
+				<div class="donate" id="donate">
 				Do you use a software to manage donations?
-				<input type="radio" name="donations" value="y">Yes&nbsp<input type="radio" name="donations" value="n">No
+				<input type="radio" name="donate" value="y" id="donate_y">Yes&nbsp<input type="radio" name="donate" value="n" id="donate_n">No
+				<br>
+				</div>
 
-				<div class="RFIDs" id="RFIDs">Do you use RFIDs?</div>
+				<div class="RFIDs" id="RFIDs">Do you use RFIDs?
+				<input type="radio" name="RFIDs" value="y" id="rfid_y">Yes&nbsp<input type="radio" name="RFIDs" value="n" id="rfid_n">No
+				</div>
 
-				<script>
-					var Answers = document.getElementById("Revenue");
-					var RFID = document.getElementById("RFIDs");
-					if (Answers.elements[0].value == "Festival") {
-						RFID.style.display = 'block';
-					}
-					else {
-						RFID.style.display = 'none';
-					}
-				</script>
+				
 				<br>
 			</div>
 		</form>
