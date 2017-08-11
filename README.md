@@ -1,6 +1,9 @@
 #ROI_calc
 Supriya Sanjay
 9.8.17
+***Note: I don't know much about web security, but I do know that I have not
+done enough input validation/defense from XSS, etc. Please add some of this 
+wherever necessary! 
 ~~~~~~~~~~~~~~~~~~~~~~~Overview~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Venue is categorized under one of the 5 larger verticals. 
 
@@ -27,9 +30,11 @@ Festival
 ---University (5)--
 University 
 
-Depending on larger vertical , different aspects of the ROI are displayed. 
+Depending on larger vertical, different aspects of the ROI are displayed. 
 This is because varying venues are concerned with different factors that
-could contribute to ROI, such as donations or social media.  
+could contribute to ROI, such as donations or social media. Additionally,
+some verticals (such as Festival and Performing Arts) have questions specific to 
+them, ensuring more customizable results. 
 -----------
 General: All
 Performing Arts: All
@@ -74,6 +79,10 @@ of online sales (out of total) grow from 3 to 20%.
 equation: online sales * (Ticket price + 1.25)
 
 ~~~~~~~~~~~~~~~Functions ~~~~~~~~~~~~~~~~~~~~~~~~~~
+extra_questions: Parses venue type and determines whether extra
+questions should be displayed. If Festival, question about RFID
+is displayed. If Performing Arts, questions about donations displayed.
+
 Calculate: Driver for initial Calculate button. Returns labeled input.
 Inputs data into labeled array, parses type and assigns to one of 5 larger
 verticals (General, Live Music, University, Festival, Performing Arts). 
